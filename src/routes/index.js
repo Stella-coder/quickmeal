@@ -5,6 +5,14 @@ import {
   Route,
 } from "react-router-dom";
 import RequireAuth from "./RequireAuth";
+import HomeScreen from "../pages/components/HomeScreen"
+import Header from "pages/Header/Header";
+import OurMenu from "pages/ourMenu/OurMenu";
+import Gallery from "pages/gallery/Gallery";
+import Contact from "pages/contact/Contact";
+import OrderDetails from "shared/OrderDetails";
+import ViewOrder from "pages/admin/ViewOrder";
+
 
 export const PublicPaths = {
   PUBLIC: "/public",
@@ -23,12 +31,13 @@ const publicRoutes = [
 const privateRoutes = [
   /* Add paths for authorized users */
   { path: PrivatePaths.PRIVATE, element: lazy(() => import('pages/PrivatePage')) },
-  { path: PrivatePaths.INTEGRATION_EXAMPLE,  element: lazy(() => import('pages/IntegrationExample')) },
+  
 ];
 
 const Routes = () => (
   <Suspense fallback={<span>Loading...</span>}>
   <BrowserRouter>
+  <Header/>
     <BrowserRoutes>
       {publicRoutes.map((route, index) => (
         <Route
@@ -48,7 +57,13 @@ const Routes = () => (
           }
         />
       ))}
-       <Route path="*" element={<div>Not Found</div>} />
+       <Route path="*" element={<HomeScreen/>} />
+       <Route path="/menu" element={<OurMenu/>} />
+       <Route path="/gallery" element={<Gallery/>} />
+       <Route path="/contact" element={<Contact/>} />
+       <Route path="/order" element={<OrderDetails/>} />
+       <Route path="/view" element={<ViewOrder/>} />
+       
     </BrowserRoutes>
   </BrowserRouter>
   </Suspense>

@@ -1,51 +1,34 @@
-import { Button as MuiButton, CircularProgress } from '@mui/material';
-import PropTypes from 'prop-types';
+import { Box, Typography } from "@mui/material"
+import {styled} from "@mui/styles"
 
-/**
- *
- * @param children => Button text or icon
- * @param variant => Mui button variants e.g contained
- * @param color => Mui button colors e.g primary
- * @param size => Button button sizes e.g large
- * @param onClick => Handles onClick
- * @param loading => Loading state - disables button and attach spinner
- * @param startIcon => The button's start icon
- * @param rest => Mui button props
- */
-const Button = ({ variant, color, size, onClick, loading, children, startIcon, ...rest }) => {
-  return (
-    <MuiButton
-      size={size}
-      color={color}
-      variant={variant}
-      onClick={onClick}
-      disabled={loading}
-      {...(!loading && { startIcon })}
-      {...rest}
-    >
-      {children}
-      {loading ? <CircularProgress size={10} /> : null}
-    </MuiButton>
-  );
-};
+const Button = ({br,clr, text, fs})=>{
+  return(
+    <MyBox sx={{borderBottom:`2px solid ${br}`,}}>
+      <Typography sx={{color: clr, textTransform:"uppercase", fontSize:fs}}>{text}</Typography>
+    </MyBox>
+  )
+}
 
-export default Button;
+export default Button
 
-Button.propTypes = {
-  loading: PropTypes.bool,
-  startIcon: PropTypes.node,
-  children: PropTypes.node.isRequired,
-  variant: PropTypes.string,
-  color: PropTypes.string,
-  size: PropTypes.string,
-  onClick: PropTypes.func
-};
+const MyBox = styled(Box)({
+  height:"25px",
+minWidth:"100px",
+backgroundColor:"#EFEFEF",
+display:"flex",
+justifyContent:"center",
+alignItems:"center",
+borderRadius:" 0 15px",
+maxWidth:"100%",
+margin:"5px 0px",
+cursor:"pointer",
+boxShadow:"0 4px 30px rgba(0,0,0, 0.3)",
+padding:"5px",
+transition: "all 350ms",
 
-Button.defaultProps = {
-  size: 'small',
-  color: 'primary',
-  variant: 'contained',
-  loading: false,
-  startIcon: null,
-  onClick: null
-};
+"&:hover":{
+  color:"#DEA954",
+  borderRadius: "2px solid #DEA954"
+}
+
+})
