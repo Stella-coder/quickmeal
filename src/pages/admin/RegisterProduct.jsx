@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import {styled} from "@mui/styles";
 import img1 from "assets/1.jpg";
-import { Button, Input } from "antd";
-import app  from "../base";
+import { Button, Input , Select} from "antd";
+import app from "../../base.js";
 import firebase from "firebase/compat/app";
 import { useNavigate } from "react-router-dom";
-import OrderDetails from "shared/OrderDetails"
+import TextField from '@mui/material/TextField';
 
 
 
-const SignPage = () => {
+const RegisterProduct = () => {
   const history = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
+  const [price, setPrice] = useState("");
+ 
   const [image, setImage] = useState(img1);
   const [avatar, setAvatar] = useState("");
   const [percent, setPercent] = useState(0);
@@ -22,6 +22,8 @@ const SignPage = () => {
   const toggle = () => {
     setShow(!show);
   };
+
+const {TextArea} = Input
 
   const uploadImage = async (e) => {
     const file = e.target.files[0];
@@ -49,40 +51,28 @@ const SignPage = () => {
     );
   };
 
-  const signUp = async () => {
-    const saveUser = await app
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-
-    if (saveUser) {
-      await app.firestore().collection("users").doc(saveUser.user.uid).set({
-        avatar,
-        name,
-        email,
-        password,
-        createdBy: saveUser.user.uid,
-      });
-      setName("");
-      setEmail("");
-      setPassword("");
-      history.push("/register");
-    }
-  };
-
+//   const signUp = async () => {
  
+//       await app.firestore().collection("users").doc(saveUser.user.uid).set({
+//         avatar,
+//         name,
+//         email,
+//         password,
+//         createdBy: saveUser.user.uid,
+//       });
+//       setName("");
+//       setEmail("");
+//       setPassword("");
+//       history.push("/register");
+//     }
+//   };
 
-  const Login = async () => {
-    const saveUser = await app
-      .auth()
-      .signInWithEmailAndPassword(email, password);
 
-    history.push("/");
-  };
+
 
   return (
-    
     <Container>
-      {show ? (
+      
         <Wrapper>
           <CardHolder>
             <HoldLabel>
@@ -91,82 +81,62 @@ const SignPage = () => {
             <Label htmlFor="up">Upload Image</Label>
             <Input
              style={{margin:"10px"}}
-              placeholder="Enter your Name"
+              placeholder="Product Name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
               }}
             />
-            <Input
-             style={{margin:"10px"}}
-              placeholder="Enter your Email"
+    
+            <TextArea style={{margin:"10px"}}
+            rows={3}
+              placeholder="Enter your Description"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
+               <Select
+      defaultValue="lucy"
+      style={{
+        width: 280,
+      }}
+    //   onChange={handleChange}
+      options={[
+        {
+          value: 'jack',
+          label: 'Jack',
+        },
+        {
+          value: 'lucy',
+          label: 'Lucy',
+        },
+       
+      ]}
+    />
             <Input
              style={{margin:"10px"}}
-              placeholder="Enter your Password"
-              type="password"
-              value={password}
+              placeholder="Enter your Price"
+              value={price}
+              number
               onChange={(e) => {
-                setPassword(e.target.value);
+                setPrice(e.target.value);
               }}
             />
-            <Input
-             style={{margin:"10px"}}
-              placeholder="Enter your Address"
-              
-              value={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
-              }}
-            />
-            <Label onClick={signUp}>Sign Up</Label>
+            
+            <Label >Upload</Label>
             
            
-            <Text>
-              Already have an account? <div onClick={toggle}>Log in</div>
-            </Text>
+            
           </CardHolder>
           <Image src={image} />
         </Wrapper>
-      ) : (
-        <Wrapper>
-          <CardHolder>
-            <Input
-             style={{margin:"10px"}}
-              placeholder="Enter your Email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <Input
-             style={{margin:"10px"}}
-              placeholder="Enter your Password"
-              type="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <Label onClick={signUp}>Log In</Label>
-
-            <Text>
-              Don't have an account? <div onClick={toggle}>Sign Up</div>
-            </Text>
-          </CardHolder>
-          <h1>Login</h1>
-        </Wrapper>
-      )}
-      <OrderDetails/>
+      
     </Container>
   );
 };
 
-export default SignPage;
+export default RegisterProduct;
 
 const Container = styled("div")({
   width: "100%",
@@ -177,8 +147,7 @@ const Container = styled("div")({
   alignItems: "center",
   paddingTop: "80px",
   zIndex: -1,
-  backgroundColor:"black",
-  flexDirection:"column"
+  backgroundColor:"black"
 })
 const Wrapper = styled("div")({
   width: "700px",
@@ -201,12 +170,11 @@ const Wrapper = styled("div")({
     flexDirection: "column-reverse",
     alignItems: "center",
     justifyContent: "flex-end",
-   
     "h1": {
       color: "black",
     }
   },
-  "@media screen and (min-width: 768px)" :{
+  "@media screen and (min-width:768px)" :{
     "h1": {
       display: "none",
     }
@@ -290,3 +258,4 @@ const Text = styled("div")({
     fontWeight: "bold",
   }
 })
+

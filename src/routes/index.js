@@ -12,6 +12,8 @@ import Gallery from "pages/gallery/Gallery";
 import Contact from "pages/contact/Contact";
 import OrderDetails from "shared/OrderDetails";
 import ViewOrder from "pages/admin/ViewOrder";
+import RegisterProduct from "pages/admin/RegisterProduct";
+import SignPage from "pages/SignPage"
 
 
 export const PublicPaths = {
@@ -63,6 +65,8 @@ const Routes = () => (
        <Route path="/contact" element={<Contact/>} />
        <Route path="/order" element={<OrderDetails/>} />
        <Route path="/view" element={<ViewOrder/>} />
+       <Route path="/sign" element={<SignPage/>} />
+       <Route path="/register" element={<RegisterProduct/>} />
        
     </BrowserRoutes>
   </BrowserRouter>

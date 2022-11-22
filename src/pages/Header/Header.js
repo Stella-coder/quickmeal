@@ -4,7 +4,8 @@ import {styled} from "@mui/styles"
 import { Link } from "react-router-dom"
 import img from "assets/1.jpg"
 import { Scale } from "@mui/icons-material"
-// import MenuRoundedIcon from "@mui/icons-material"
+import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 const Header = ()=>{
@@ -42,7 +43,7 @@ const Header = ()=>{
         <>
         <MyContainer sx={{backgroundColor: navbar? "#1B2024": "transparent"}} >
             <Wrapper>
-                <MenuH onClick={changeToggle}>menu</MenuH>
+                <MenuH onClick={changeToggle}><MenuIcon/></MenuH>
                 <Logo> logo</Logo>
                 <Wrapper2> 
                     <Link to="/"style={{textDecoration:"none", color:"white"}} >
@@ -60,7 +61,7 @@ const Header = ()=>{
                    
                 </Wrapper2>
               
-                <Cart onClick={changeCartToggle}> cart</Cart>
+                <Cart onClick={changeCartToggle}> <ShoppingCartIcon /> <div style={{position:"absolute", fontSize:"10px",color:"#DEA954", left:20, bottom:0, fontWeight:"bold"}} >2</div></Cart>
             </Wrapper>
         </MyContainer>
          {
@@ -166,7 +167,8 @@ const Wrapper2 = styled(Box)({
     
 }) 
 const Cart = styled(Box)({
-      
+      display:"flex",
+      position:"relative"
 }) 
 const MobileWrapper = styled(Box)({
      height:"100vh",

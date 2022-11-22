@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import { Box, } from "@mui/material"
 import { styled } from "@mui/styles"
 import Table from '@mui/material/Table';
@@ -8,8 +8,24 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Radio from '@mui/material/Radio';
 
 
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute' ,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const TAX_RATE = 0.07;
 
@@ -42,7 +58,23 @@ const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
+
+
+
+
+ 
+
 const OrderDetails = ()=>{
+  const [selectedValue, setSelectedValue] = useState('a');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
     return(
         <Container>
             <Header>Your Order</Header>
@@ -79,6 +111,55 @@ const OrderDetails = ()=>{
       </Table>
     </TableContainer>
             </Wrapper>
+            <Payment>
+              <PaymentHeader>Payment Method </PaymentHeader>
+              <PaymentWrapper>
+    
+      <Radio
+        checked={selectedValue === 'a'}
+        onChange={handleChange}
+        value="a"
+        name="radio-buttons"
+        inputProps={{ 'aria-label': 'A' }}
+      />
+      <div> Pay on delivery</div>
+      </PaymentWrapper>
+      <PaymentWrapper>
+      <Radio
+        checked={selectedValue === 'b'}
+        onChange={handleChange}
+        value="b"
+        name="radio-buttons"
+        inputProps={{ 'aria-label': 'B' }}
+      />
+  
+    <div> Pay with paystack</div>
+  
+  </PaymentWrapper>
+{
+  selectedValue === "a"?   <PaymentButton>Place your order</PaymentButton>
+  :<PaymentButton onClick={handleOpen}>Open paystack modal</PaymentButton>
+}
+
+  <div>
+      
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+            </Payment>
         </Container>
     )
 }
@@ -111,12 +192,35 @@ const Header = styled("div")({
     fontSize:"20px",
     marginTop:"85px"
 })
+const Payment = styled(Box)({
+  backgroundColor:"white",
+  minWidth:300,
+  display:"flex",
+  alignItems:"center",
+  flexDirection:"column",
+  height:"180px",
+  margin:"10px 0px"
+})
+const PaymentHeader = styled("div")({
+  fontSize:"20px",
+  fontWeight:"bold"
+})
+const PaymentWrapper = styled(Box)({
+  display:"flex",
+  alignItems:"center"
+})
+const PaymentButton = styled("div")({
+  width:"180px",
+  height:"40px",
+  backgroundColor:"black",
+  display:"flex",
+  justifyContent:"center",
+  alignItems:"center",
+  color:"white",
+  borderRadius:"5px",
+  cursor:"pointer"
+})
 // const Container = styled(Box)({})
 
 
 
-// export default function SpanningTable() {
-//   return (
-    
-//   );
-// }

@@ -10,6 +10,9 @@ import { Carousel } from 'antd';
 import img2 from "assets/pizza1.jpg"
 
 const HomeScreen = ()=>{
+
+  
+
     return(
     <div>
         
@@ -17,6 +20,7 @@ const HomeScreen = ()=>{
         <div><HeroSection name="QuickMeal Restaurant" address="45 Gwarzo Road, Buk, Kano." img={heroImg} /></div>
         <div><HeroSection name="QuickMeal Restaurant" address="45 Gwarzo Road, Buk, Kano." img={img2} /></div>
         </Carousel>
+        
         <div><OrderOnline/></div>
         <div><CallUs/></div>
         <div><FromMenu/></div>
