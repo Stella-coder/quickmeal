@@ -7,7 +7,7 @@ import { AuthState } from 'utils/AuthState';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import {store} from "utils/store"
-import persistStore from 'redux-persist/lib/storage';
+import {persistStore} from 'redux-persist';
 // import { AppProviders } from 'context';
 
 let persistor = persistStore(store)
