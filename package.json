@@ -18,6 +18,7 @@
     "axios": "^0.21.1",
     "babel-plugin-import": "^1.13.3",
     "firebase": "^9.14.0",
+    "firebase-tools": "^11.16.1",
     "framer-motion": "^7.6.7",
     "framer-motion-carousel": "^2.0.1",
     "react": "^17.0.1",

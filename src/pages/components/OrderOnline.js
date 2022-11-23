@@ -50,13 +50,17 @@ const responsive = {
     return(
         <MyContainer>
             <HeaderProps text="11:00am to 9:00pm" header="Order Online"/>
-            <Box sx={{display:"flex",  justifyContent:"center", alignItems:"center", margin:"20px 0px", width:"100%"}}>
+            <Box sx={{display:"flex",  justifyContent:"center", alignItems:"center", margin:"20px 0px", width:"85%", overflowX:"scroll",scroll:"visible"}}>
          
 
                 <MediaCard name="Spaghetti" img={img1} />
                 <MediaCard name="Pizza" img = {img2}  />
                 <MediaCard name="Sharwama" img={img3} />
                 <MediaCard name="Cake" img={img4} />
+                <MediaCard name="Cake" img={img4} />
+                <MediaCard name="Cake" img={img4} />
+                <MediaCard name="Cake" img={img4} />
+
                 {/* </Grid> */}
              
             </Box>
@@ -68,5 +72,9 @@ const responsive = {
 export default OrderOnline
 
 const MyContainer = styled("div")({
-width:"100%"
+width:"100%",
+display:"flex",  
+justifyContent:"center",
+ alignItems:"center", 
+ flexDirection:"column"
 })

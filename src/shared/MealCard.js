@@ -25,8 +25,10 @@ export default MealCard
 const MyCard = styled(Card)({
 height:"250px",
 width: "250px",
-margin:"10px",
+margin:"20px",
 maxHeight:"100%"
+
+
 
 })
 const ImageBox = styled(Box)({

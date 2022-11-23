@@ -69,10 +69,18 @@ const Header = ()=>{
             <MobileWrapper>
             <div style={{width:"100%", display:"flex", justifyContent:"center", cursor:"pointer"}} onClick={changeToggle}>X</div>
             <WrapText>
-                     <MyTypographyMobile sx={{fontSize:"12px"}}>Home</MyTypographyMobile>
-                    <MyTypographyMobile sx={{fontSize:"12px"}}>Our Menu</MyTypographyMobile>
-                    <MyTypographyMobile sx={{fontSize:"12px"}}>Gallery</MyTypographyMobile>
+            <Link to="/"style={{textDecoration:"none", color:"white"}} >
+                    <MyTypographyMobile onClick={changeToggle} sx={{fontSize:"12px", textDecoration:"none", }}>Home</MyTypographyMobile>
+                    </Link>
+                    <Link to ="/menu" style={{textDecoration:"none", color:"white"}}>
+                    <MyTypographyMobile onClick={changeToggle} sx={{fontSize:"12px"}}>Our Menu</MyTypographyMobile>
+                    </Link>
+                    <Link to ="/gallery" style={{textDecoration:"none", color:"white"}}>
+                    <MyTypographyMobile onClick={changeToggle} sx={{fontSize:"12px"}}>Gallery</MyTypographyMobile>
+                    </Link>
+                    <Link to="contact" onClick={changeToggle} style={{textDecoration:"none", color:"white"}}>
                     <MyTypographyMobile sx={{fontSize:"12px"}}>Contact</MyTypographyMobile>
+                    </Link>
             </WrapText>
         </MobileWrapper>
         : null
@@ -132,7 +140,7 @@ const MyContainer = styled(Box)({
     position:"fixed",
     color:"white",
     zIndex:10,
-    transition:"all 350ms"
+    transition:"all 350ms",
    
 }) 
 const Wrapper = styled(Box)({
@@ -168,7 +176,8 @@ const Wrapper2 = styled(Box)({
 }) 
 const Cart = styled(Box)({
       display:"flex",
-      position:"relative"
+      position:"relative",
+      cursor:"pointer"
 }) 
 const MobileWrapper = styled(Box)({
      height:"100vh",

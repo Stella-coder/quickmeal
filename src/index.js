@@ -3,13 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from 'reportWebVitals';
-import { AppProviders } from 'context';
+import { AuthState } from 'utils/AuthState';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import {store} from "utils/store"
+import persistStore from 'redux-persist/lib/storage';
+// import { AppProviders } from 'context';
+
+let persistor = persistStore(store)
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProviders>
+    {/* <AppProviders> */}
+    <AuthState>
+      <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+
       <App />
-    </AppProviders>
+      </PersistGate>
+      </Provider>
+      </AuthState>
+      
+    {/* </AppProviders> */}
   </React.StrictMode>
   ,
   document.getElementById('root')

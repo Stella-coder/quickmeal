@@ -19,7 +19,7 @@ backgroundColor:"black",
 justifyContent:"center",
 alignItems:"center",
 flexWrap:"wrap",
-"@media screen and (min-width:768px)":{
+"@media screen and (max-width:768px)":{
     fontSize:"20px"
 }
 })

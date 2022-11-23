@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {styled} from "@mui/styles";
 import img1 from "assets/1.jpg";
 import { Button, Input , Select} from "antd";
-import app from "../../base.js";
+import {app} from "../../base.js";
 import firebase from "firebase/compat/app";
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
@@ -10,10 +10,11 @@ import TextField from '@mui/material/TextField';
 
 
 const RegisterProduct = () => {
-  const history = useNavigate();
+//   const history = useNavigate();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
  
   const [image, setImage] = useState(img1);
   const [avatar, setAvatar] = useState("");
@@ -51,21 +52,23 @@ const {TextArea} = Input
     );
   };
 
-//   const signUp = async () => {
+  const upload = async () => {
  
-//       await app.firestore().collection("users").doc(saveUser.user.uid).set({
-//         avatar,
-//         name,
-//         email,
-//         password,
-//         createdBy: saveUser.user.uid,
-//       });
-//       setName("");
-//       setEmail("");
-//       setPassword("");
-//       history.push("/register");
-//     }
-//   };
+      await app.firestore().collection("product").set({
+        avatar,
+        desc,
+        category,
+        price,
+        // createdBy: saveUser.user.uid,
+        
+      });
+      setName("");
+      setCategory("");
+      setDesc("");
+      setPrice("");
+      
+    }
+  
 
 
 
@@ -91,25 +94,62 @@ const {TextArea} = Input
             <TextArea style={{margin:"10px"}}
             rows={3}
               placeholder="Enter your Description"
-              value={email}
+              value={desc}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setDesc(e.target.value);
               }}
             />
                <Select
-      defaultValue="lucy"
+      defaultValue="Enter Category"
       style={{
         width: 280,
       }}
-    //   onChange={handleChange}
+      onChange={(e) => {
+        setCategory(e.target.value);
+      }}
       options={[
         {
-          value: 'jack',
-          label: 'Jack',
+          value: 'Pizza',
+          label: 'Pizza',
         },
         {
-          value: 'lucy',
-          label: 'Lucy',
+          value: 'Salad',
+          label: 'Salad',
+        },
+        {
+          value: 'Pastries',
+          label: 'Pastries',
+        },
+        {
+          value: 'Snacks',
+          label: 'Snacks',
+        },
+        {
+          value: 'Soup',
+          label: 'Soup',
+        },
+        {
+          value: 'Drinks',
+          label: 'Drinks',
+        },
+       
+        {
+          value: 'Cake',
+          label: 'Cake',
+        },
+       
+        {
+          value: 'Meat',
+          label: 'Meat',
+        },
+       
+        {
+          value: 'IceCream',
+          label: 'IceCream',
+        },
+        {
+          value: 'Others',
+          label: 'Others',
         },
        
       ]}
@@ -124,7 +164,7 @@ const {TextArea} = Input
               }}
             />
             
-            <Label >Upload</Label>
+            <Label onClick={upload}>Upload Product</Label>
             
            
             

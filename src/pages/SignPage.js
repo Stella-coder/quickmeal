@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import {styled} from "@mui/styles";
 import img1 from "assets/1.jpg";
 import { Button, Input } from "antd";
-import app  from "../base";
+import {app}  from "../base";
 import firebase from "firebase/compat/app";
 import { useNavigate } from "react-router-dom";
 import OrderDetails from "shared/OrderDetails"
+import 'firebase/compat/storage'
+// import 'firebase/compat/auth'
 
-
+// import { getStorage } from "firebase/storage";
+// const storage = getStorage(app);
 
 const SignPage = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,7 +68,7 @@ const SignPage = () => {
       setName("");
       setEmail("");
       setPassword("");
-      history.push("/register");
+      navigate("/register");
     }
   };
 
@@ -76,7 +79,7 @@ const SignPage = () => {
       .auth()
       .signInWithEmailAndPassword(email, password);
 
-    history.push("/");
+    navigate("/");
   };
 
   return (
