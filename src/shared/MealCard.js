@@ -1,19 +1,19 @@
 import Button from "./Button"
 import {Card, Box, Typography, Container} from "@mui/material"
 import {styled} from "@mui/styles"
-import img from "assets/sharwama.jpg"
+// import img from "assets/sharwama.jpg"
 
-const MealCard = ()=>{
+const MealCard = ({price, name, desc, img, clk})=>{
     return(
         <MyCard>
-            <ImageBox>
-                <PriceBox> $20</PriceBox>
+            <ImageBox sx={{backgroundImage:`url(${img})`,}}>
+                <PriceBox> #{price}</PriceBox>
             </ImageBox>
             <TextWrapper>
                 <Wrapper>
-                    <Typography sx={{ fontSize:"17px", textTransform:"uppercase"}}>Name</Typography>
-                    <Typography sx={{color:"gray", fontSize:"13px"}}>Description</Typography>
-                   <Button clr= "#DEA954" br ="#DEA954" text="Add to cart" fs="11px"/>
+                    <Typography sx={{ fontSize:"17px", textTransform:"uppercase"}}>{name}</Typography>
+                    <Typography sx={{color:"gray", fontSize:"13px"}}>{desc}</Typography>
+                   <Button clr= "#DEA954" br ="#DEA954" text="Add to cart" fs="11px" click={clk}/>
                 </Wrapper>
             </TextWrapper>
         </MyCard>
@@ -32,7 +32,7 @@ maxHeight:"100%"
 
 })
 const ImageBox = styled(Box)({
-backgroundImage:`url(${img})`,
+
  backgroundSize:"cover", 
  backgroundRepeat:"no-repeat", 
  backgroundPosition:"fixed",

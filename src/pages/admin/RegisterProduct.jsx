@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {styled} from "@mui/styles";
 import img1 from "assets/1.jpg";
 import { Button, Input , Select} from "antd";
@@ -6,15 +6,16 @@ import {app} from "../../base.js";
 import firebase from "firebase/compat/app";
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
+import {AuthContext} from "utils/AuthState"
 
 
 
 const RegisterProduct = () => {
-//   const history = useNavigate();
+  const currentUser = useContext(AuthContext);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Enter Category");
  
   const [image, setImage] = useState(img1);
   const [avatar, setAvatar] = useState("");
@@ -51,26 +52,37 @@ const {TextArea} = Input
       }
     );
   };
+  // console.log(currentUser)
 
   const upload = async () => {
- 
-      await app.firestore().collection("product").set({
-        avatar,
-        desc,
-        category,
-        price,
-        // createdBy: saveUser.user.uid,
-        
-      });
-      setName("");
-      setCategory("");
+    // if (currentUser) {
+      await app
+        .firestore()
+        .collection("product")
+        .doc()
+        .set({
+          avatar,
+          name,
+          desc,
+          category,
+          price,
+          // createdBy: currentUser.uid,
+        });
+       
+        setName("")
+      setAvatar("");
       setDesc("");
+      setCategory("");
       setPrice("");
       
-    }
-  
+    // }
+  };
 
-
+  const handleChange = (value) => {
+    setCategory(value)
+    console.log(`selected ${value}`);
+    
+  };
 
 
   return (
@@ -100,13 +112,11 @@ const {TextArea} = Input
               }}
             />
                <Select
-      defaultValue="Enter Category"
+      value={category}
       style={{
         width: 280,
       }}
-      onChange={(e) => {
-        setCategory(e.target.value);
-      }}
+      onChange={handleChange}
       options={[
         {
           value: 'Pizza',

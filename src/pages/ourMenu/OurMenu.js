@@ -48,11 +48,23 @@ const OurMenu = ()=>{
 
     return(
         <Box sx={{width:"100%"}}>
+          <div>
             <HeroSection name="our menu" img={img1}/>
-            <Box sx={{display:"flex", width:"100%", justifyContent:"flex-start", margin:"30px", flexDirection:"column"}}>
+            </div>
+            <Box sx={{display:"flex", width:"80%", justifyContent:"flex-start", margin:"30px", flexDirection:"column"}}>
            
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" textColor="inherit"  TabIndicatorProps={{
+            <Box 
+            // sx={{ borderBottom: 1, borderColor: 'divider' }}
+            sx={{
+              width:"100%", display:"flex", flexWrap:"wrap",height:"100%"
+            }}
+            >
+  <Tabs value={value} onChange={handleChange} 
+   variant="scrollable"
+   scrollButtons
+   aria-label="scrollable auto tabs example"
+   allowScrollButtonsMobile
+  TabIndicatorProps={{
     style: {
       backgroundColor: "#DEA954",
      color:"2DAA6F",
@@ -61,6 +73,13 @@ const OurMenu = ()=>{
     <Tab label="Pizza" {...a11yProps(0)} />
     <Tab label="Soup" {...a11yProps(1)} />
     <Tab label="Shawarma" {...a11yProps(2)} />
+    <Tab label="Pasries" {...a11yProps(3)} />
+    <Tab label="Salad" {...a11yProps(4)} />
+    <Tab label="Snack" {...a11yProps(5)} />
+    <Tab label="Cake" {...a11yProps(6)} />
+    <Tab label="Ice cream" {...a11yProps(7)} />
+    <Tab label="Meat" {...a11yProps(8)} />
+    <Tab label="Others" {...a11yProps(9)} />
   </Tabs>
 </Box>
 <TabPanel value={value} index={0}>
@@ -78,6 +97,41 @@ const OurMenu = ()=>{
 <WrapperBox>
     <MealCard/>
     <MealCard/>
+    <MealCard/>
+ </WrapperBox>
+</TabPanel>
+<TabPanel value={value} index={3}>
+<WrapperBox>
+    <MealCard/>
+ </WrapperBox>
+</TabPanel>
+<TabPanel value={value} index={4}>
+<WrapperBox>
+    <MealCard/>
+ </WrapperBox>
+</TabPanel>
+<TabPanel value={value} index={5}>
+<WrapperBox>
+    <MealCard/>
+ </WrapperBox>
+</TabPanel>
+<TabPanel value={value} index={6}>
+<WrapperBox>
+    <MealCard/>
+ </WrapperBox>
+</TabPanel>
+<TabPanel value={value} index={7}>
+<WrapperBox>
+    <MealCard/>
+ </WrapperBox>
+</TabPanel>
+<TabPanel value={value} index={8}>
+<WrapperBox>
+    <MealCard/>
+ </WrapperBox>
+</TabPanel>
+<TabPanel value={value} index={9}>
+<WrapperBox>
     <MealCard/>
  </WrapperBox>
 </TabPanel>

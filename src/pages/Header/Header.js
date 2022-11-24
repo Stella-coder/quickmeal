@@ -5,10 +5,18 @@ import { Link } from "react-router-dom"
 import img from "assets/1.jpg"
 import { Scale } from "@mui/icons-material"
 import MenuIcon from '@mui/icons-material/Menu';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useSelector, useDispatch } from "react-redux"
+import { removeOrder, totalOrder } from "utils/ReduxGlobal"
 
 
 const Header = ()=>{
+    const data = useSelector((state) => state.persistedReducer.order);
+    const totalCost = useSelector((state) => state.persistedReducer.totalMealCost);
+    const [total, setTotal] = useState(totalCost)
+    const dispatch= useDispatch()
+    console.log(data, "data")
     const [toggle, setToggle] = useState(false)
     const [cartToggle, setCartToggle] = useState(false)
     const changeToggle =()=>{
@@ -38,6 +46,10 @@ const Header = ()=>{
         changeBgColor()
         window.addEventListener("scroll", changeBgColor)
     })
+    useEffect(() => {
+        dispatch(totalOrder());
+        console.log(totalCost, "total")
+      }, [data])
 
     return(
         <>
@@ -61,7 +73,7 @@ const Header = ()=>{
                    
                 </Wrapper2>
               
-                <Cart onClick={changeCartToggle}> <ShoppingCartIcon /> <div style={{position:"absolute", fontSize:"10px",color:"#DEA954", left:20, bottom:0, fontWeight:"bold"}} >2</div></Cart>
+                <Cart onClick={changeCartToggle}> <ShoppingCartIcon /> <div style={{position:"absolute", fontSize:"10px",color:"#DEA954", left:20, bottom:0, fontWeight:"bold"}} >{data?.length}</div></Cart>
             </Wrapper>
         </MyContainer>
          {
@@ -95,35 +107,32 @@ const Header = ()=>{
                     <div style={{marginRight:"20px", cursor:"pointer"}} onClick={changeCartToggle} >X</div>
                 </CartHeader>
                 <HoldScroll>
-                <CartCard>
+               { data?.length > 0?
+                data?.map((props)=>(
+                    <CartCard>
                     <Hold>
                     <Text>
-                        <Name>Piza</Name>
+                        <Name>{props.name}</Name>
                         <div style={{display:"flex"}}>
-                            1 x <Price>#3455</Price>
+                            {props.qty} x <Price> # {props.price}</Price>
                         </div>
                     </Text>
-                    <CartImage src={img}/>
+                    <CartImage src={props.avatar}/>
                     </Hold>
-                    <DeleteIcon>d</DeleteIcon>
+                    <DeleteIconHold onClick={()=>{
+                        dispatch(removeOrder(props))
+                    }}><DeleteIcon sx={{fontSize:"15px", color:"tomato"}}/></DeleteIconHold>
                 </CartCard>
-                <CartCard>
-                    <Hold>
-                    <Text>
-                        <Name>Piza</Name>
-                        <div style={{display:"flex"}}>
-                            1 x <Price>#3455</Price>
-                        </div>
-                    </Text>
-                    <CartImage src={img}/>
-                    </Hold>
-                    <DeleteIcon>d</DeleteIcon>
-                </CartCard>
+                )): "No item"
+               }
+               
                 </HoldScroll>
                 <SubTotal>
-                    SubTotal:  <Price>#3455</Price>
+                    SubTotal:  <Price># {totalCost}</Price>
                 </SubTotal>
-                <Checkout>Checkout</Checkout>
+                <Link to="/order" style={{textDecoration:"none", color:"white"}} >
+                <Checkout onClick={changeCartToggle}>Checkout</Checkout>
+                </Link>
             </CartWrapper>
             </CartContainer>
             :
@@ -305,7 +314,9 @@ const CartImage = styled("img")({
     objectFit:"cover",
     margin:"0px 10px"
  })
-const DeleteIcon = styled("div")({ })
+const DeleteIconHold = styled("div")({
+    
+ })
 const Hold = styled("div")({
     display:"flex",
     alignItems:"center",

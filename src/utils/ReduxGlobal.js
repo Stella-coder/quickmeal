@@ -7,24 +7,24 @@ const initialState = {
 };
 
 const hotelState = createSlice({
-  name: "Hotel",
+  name: "product",
   initialState,
   reducers: {
-    addData: (state, { payload }) => {
-      state.userData.push({ ...payload });
-    },
+    // addData: (state, { payload }) => {
+    //   state.userData.push({ ...payload });
+    // },
 
     addProduct: (state, { payload }) => {
       state.products = payload;
     },
-    addQty: (state, { payload }) => {
+    addOrder: (state, { payload }) => {
       const check = state.order.findIndex((el) => el.id === payload.id);
       if (check >= 0) {
-        state.order[check].days += 1;
+        state.order[check].qty += 1;
       } else {
         const addValue = {
           ...payload,
-          days: 1,
+          qty: 1,
         };
         state.order.push(addValue);
       }
@@ -61,9 +61,10 @@ const hotelState = createSlice({
   },
 });
 
+
 export const {
   addBooking,
-  addQty,
+  addOrder,
   reduceQty,
   addProduct,
   removeOrder,

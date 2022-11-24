@@ -7,7 +7,7 @@ import MediaCard from "shared/Card"
 import CallUs from "./CallUs"
 import heroImg from "assets/spa1.jpg"
 import { Carousel } from 'antd';
-import img2 from "assets/pizza1.jpg"
+import img2 from "assets/rice2.jpg"
 
 const HomeScreen = ()=>{
 
@@ -16,10 +16,11 @@ const HomeScreen = ()=>{
     return(
     <div>
         
-      <Carousel autoplay fade autoplaySpeed={2000} >
+      {/* <Carousel autoplay fade autoplaySpeed={2000} >
         <div><HeroSection name="QuickMeal Restaurant" address="45 Gwarzo Road, Buk, Kano." img={heroImg} /></div>
         <div><HeroSection name="QuickMeal Restaurant" address="45 Gwarzo Road, Buk, Kano." img={img2} /></div>
-        </Carousel>
+        </Carousel> */}
+        <div><HeroSection name="QuickMeal Restaurant" address="45 Gwarzo Road, Buk, Kano." img={img2} /></div>
         
         <div><OrderOnline/></div>
         <div><CallUs/></div>

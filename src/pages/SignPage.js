@@ -5,7 +5,7 @@ import { Button, Input } from "antd";
 import {app}  from "../base";
 import firebase from "firebase/compat/app";
 import { useNavigate } from "react-router-dom";
-import OrderDetails from "shared/OrderDetails"
+import OrderDetails from "pages/OrderDetails"
 import 'firebase/compat/storage'
 // import 'firebase/compat/auth'
 

@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material"
 import {styled} from "@mui/styles"
 
-const Button = ({br,clr, text, fs})=>{
+const Button = ({br,clr, text, fs, click})=>{
   return(
-    <MyBox sx={{borderBottom:`2px solid ${br}`,}}>
+    <MyBox onClick={click} sx={{borderBottom:`2px solid ${br}`,} }>
       <Typography sx={{color: clr, textTransform:"uppercase", fontSize:fs}}>{text}</Typography>
     </MyBox>
   )

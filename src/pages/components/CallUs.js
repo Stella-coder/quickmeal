@@ -4,7 +4,7 @@ import { styled } from "@mui/styles"
 const CallUs =()=>{
     return(
         <MyBox>
-            <Typography sx={{fontSize:"30px", color:"white", letterSpacing:2}}>CALL US : 9837367399</Typography>
+            <span >CALL US : 9837367399</span>
         </MyBox>
     )
 }
@@ -19,7 +19,10 @@ backgroundColor:"black",
 justifyContent:"center",
 alignItems:"center",
 flexWrap:"wrap",
+color:"white",
+fontSize:"30px",
+letterSpacing:4,
 "@media screen and (max-width:768px)":{
-    fontSize:"20px"
+    fontSize:"17px"
 }
 })

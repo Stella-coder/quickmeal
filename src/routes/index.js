@@ -10,7 +10,7 @@ import Header from "pages/Header/Header";
 import OurMenu from "pages/ourMenu/OurMenu";
 import Gallery from "pages/gallery/Gallery";
 import Contact from "pages/contact/Contact";
-import OrderDetails from "shared/OrderDetails";
+import OrderDetails from "pages/OrderDetails";
 import ViewOrder from "pages/admin/ViewOrder";
 import RegisterProduct from "pages/admin/RegisterProduct";
 import SignPage from "pages/SignPage"
